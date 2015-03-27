@@ -1,0 +1,11 @@
+.category-icon {
+	display: inline-block;
+	vertical-align: text-top;
+	text-align: center;
+	width: 75px;
+	height: 75px;
+	line-height: 75px;
+	background-size: 75px 75px;
+	background-image: url("../fw/ionicons/ios7-bookmarks-outline.png");
+	background-repeat: no-repeat;
+}

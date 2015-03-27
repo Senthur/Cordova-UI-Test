@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+<meta name="viewport"
+	content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<link rel="stylesheet" href="fw/bootcards/css/bootcards-android.min.css">
+<link rel="stylesheet" href="css/ui-test.css">
+<title>Cordova UI Test</title>
+</head>
+<body>
+	<!-- Header start -->
+	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+			</div>
+			<button type="button" class="btn btn-default btn-back pull-left hidden" onclick="history.back()">
+				<i class="fa fa-lg fa-chevron-left"></i> <span>Back</span>
+			</button>
+			<button type="button" class="btn btn-default btn-menu pull-left offcanvas-toggle">
+				<i class="fa fa-lg fa-bars"></i> <span>Menu</span>
+			</button>
+			<a class="navbar-brand" title="Customers v{{getAppVersion}}" href="#">Unified UI Test</a>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#"> <i class="fa fa-users"></i> Menu 1
+					</a></li>
+					<li><a href="#"> <i class="fa fa-building-o"></i> Menu 2
+					</a></li>
+					<li><a href="#"> <i class="fa fa-gears"></i> Menu 3
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- Header end -->
+	<div class="site-content">
+		<div class="panel panel-default bootcards-summary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Search Results</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-6 col-sm-4">
+						<a class="bootcards-summary-item" href="#"> <span class="category-icon"></span>
+							<h4>
+								Category 1 <span class="label label-danger">98</span>
+							</h4>
+						</a>
+					</div>
+					<div class="col-xs-6 col-sm-4">
+						<a class="bootcards-summary-item" href="#"> <span class="category-icon"></span>
+							<h4>
+								Category 2 <span class="label label-info">20</span>
+							</h4>
+						</a>
+					</div>
+					<div class="col-xs-6 col-sm-4">
+						<a class="bootcards-summary-item" href="#"> <span class="category-icon"></span>
+							<h4>
+								Category 3 <span class="label label-danger">112</span>
+							</h4>
+						</a>
+					</div>
+					<div class="col-xs-6 col-sm-4">
+						<a class="bootcards-summary-item" href="#"> <span class="category-icon"></span>
+							<h4>
+								Category 4 <span class="label label-warning">49</span>
+							</h4>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer">
+				<small>Add to cart to calculate optimal price</small>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer start -->
+	<div class="navbar navbar-default navbar-fixed-bottom">
+		<div class="container">
+			<div class="btn-group">
+				<a href="#" class="btn btn-default active"> <i class="fa fa-2x fa-users"></i> Home
+				</a> <a href="#" class="btn btn-default"> <i class="fa fa-2x fa-building-o"></i> Cart
+				</a> <a href="#" class="btn btn-default"> <i class="fa fa-2x fa-gears"></i> Favorites
+				</a>
+			</div>
+			<div class="bootcards-desktop-footer clearfix">
+				<p class="pull-left">Text for desktop footer goes here</p>
+				<p class="pull-left">More text for desktop footer goes here</p>
+			</div>
+		</div>
+	</div>
+	<!-- Header end -->
+	<script src="fw/bootstrap/js/bootstrap.min.js"></script>
+	<script src="fw/bootcards/js/bootcards.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+</body>
+</html>
