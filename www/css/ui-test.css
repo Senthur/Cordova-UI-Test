@@ -1,11 +1,22 @@
-.category-icon {
+.hide {
+	display: none;
+}
+
+.icon {
 	display: inline-block;
 	vertical-align: text-top;
 	text-align: center;
-	width: 75px;
-	height: 75px;
-	line-height: 75px;
-	background-size: 75px 75px;
-	background-image: url("../fw/ionicons/ios7-bookmarks-outline.png");
+	width: 50px;
+	height: 65px;
+	line-height: 65px;
+	background-size: 50px 50px;
 	background-repeat: no-repeat;
+}
+
+.category-icon {
+	background-image: url("../fw/ionicons/ios7-bookmarks-outline.png");
+}
+
+.search-icon {
+	background-image: url("../fw/ionicons/android-search.png");
 }
