@@ -41,21 +41,37 @@ var ui = {
 						console.log(x);
 					}
 				});
-				search.image("Pistacho", 0);
-				search.image("Pistacho", 1);
-				search.image("Pistacho", 2);
-				search.image("Pistacho", 3);
+				search.params = {
+					term : "Pistacho",
+					page : 0
+				};
+				search.loadItems();
+				utils.infiniteScrolling(search.nextPage);
+				// search.image("Pistacho", 1);
+				// search.image("Pistacho", 2);
+				// search.image("Pistacho", 3);
 			});
 		}
 	}
 };
 
 var search = {
-	image : function(str, start) {
+	maxItems : 8,
+	params : {
+		term : "",
+		page : 0
+	},
+	nextPage : function() {
+		search.params.page = search.params.page + 1;
+		search.loadItems();
+	},
+	loadItems : function() {
 		// https://developers.google.com/image-search/v1/jsondevguide
 		// http://jscroll.com/
 		var count = 8;
-		var api = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=" + count + "&start=" + count * start + "&q=" + str;
+		var api = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=" + search.maxItems + "&start="
+				+ (search.params.page * search.maxItems) + "&q=" + search.params.term;
+		console.log(api);
 		var items = $(".items");
 		var template = $(".result-template .list-group-item").clone();
 		$.ajax({
@@ -63,21 +79,45 @@ var search = {
 			url : api,
 			dataType : "jsonp",
 			success : function(data) {
-				var images = data.responseData.results;
-				$.each(images, function(imageIndex) {
-					var image = images[imageIndex]
-					var item = template.clone();
-					item.find(".item-img").attr("src", image.tbUrl);
-					item.find(".item-name").text(image.contentNoFormatting);
-					item.find(".item-desc").text(image.titleNoFormatting);
-					items.append(item);
-				});
+				if (data.responseData && data.responseData.results) {
+					var images = data.responseData.results;
+					$.each(images, function(imageIndex) {
+						var image = images[imageIndex]
+						var item = template.clone();
+						item.find(".item-img").attr("src", image.tbUrl);
+						item.find(".item-name").text(image.contentNoFormatting);
+						item.find(".item-desc").text(image.titleNoFormatting);
+						items.append(item);
+					});
+				}
 			},
 			failure : function(err) {
 				alert(err);
 			}
 		});
 	}
-}
+};
+
+var utils = {
+	infiniteScrolling : function(callback) {
+		$(window).scroll(function() {
+			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+				$('div.loading').show();
+				callback();
+				// $.ajax({
+				// url : "loadmore.php",
+				// success : function(html) {
+				// if (html) {
+				// $("#postswrapper").append(html);
+				// $('div#loadmoreajaxloader').hide();
+				// } else {
+				// $('div#loadmoreajaxloader').html('<center>No more posts to show.</center>');
+				// }
+				// }
+				// });
+			}
+		});
+	}
+};
 
 app.initialize();
