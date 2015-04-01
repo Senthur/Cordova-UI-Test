@@ -18,7 +18,9 @@ var ui = {
 	},
 	home : {
 		onHomeNavigationButtonClick : function() {
-			$(".site-content").load("html/search.html");
+			$(".site-content").load("html/search.html", function() {
+				$(".search-text").trigger('click').focus();
+			});
 			$(".site-content").on("click", ".search", ui.search.onSearch);
 		}
 	},
