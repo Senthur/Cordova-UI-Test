@@ -47,6 +47,10 @@ var ui = {
 					page : 0
 				};
 				search.loadItems();
+				search.nextPage();
+				search.loadItems();
+				search.nextPage();
+				search.loadItems();
 				utils.infiniteScrolling(search.nextPage);
 			});
 		}
@@ -54,7 +58,7 @@ var ui = {
 };
 
 var search = {
-	maxItems : 8,
+	maxItems : 5,
 	params : {
 		term : "",
 		page : 0
