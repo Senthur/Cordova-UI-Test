@@ -31,7 +31,8 @@ var ui = {
 		}
 	},
 	category : {
-		onCategorySelection : function() {
+		onCategorySelection : function(e) {
+			var term = $(e.target).parents(".category").find(".term").text();
 			$(".site-content").load("html/results.html", function() {
 				$('.items').jscroll({
 					loadingHtml : '<img src="loading.gif" alt="Loading" /> Loading...',
@@ -42,14 +43,11 @@ var ui = {
 					}
 				});
 				search.params = {
-					term : "Pistacho",
+					term : term,
 					page : 0
 				};
 				search.loadItems();
 				utils.infiniteScrolling(search.nextPage);
-				// search.image("Pistacho", 1);
-				// search.image("Pistacho", 2);
-				// search.image("Pistacho", 3);
 			});
 		}
 	}
@@ -71,7 +69,6 @@ var search = {
 		var count = 8;
 		var api = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=" + search.maxItems + "&start="
 				+ (search.params.page * search.maxItems) + "&q=" + search.params.term;
-		console.log(api);
 		var items = $(".items");
 		var template = $(".result-template .list-group-item").clone();
 		$.ajax({
