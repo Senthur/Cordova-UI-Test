@@ -34,24 +34,12 @@ var ui = {
 		onCategorySelection : function(e) {
 			var term = $(e.target).parents(".category").find(".term").text();
 			$(".site-content").load("html/results.html", function() {
-				$('.items').jscroll({
-					loadingHtml : '<img src="loading.gif" alt="Loading" /> Loading...',
-					autoTriggerUntil : 10,
-					callback : function(x) {
-						console.log("here");
-						console.log(x);
-					}
-				});
 				search.params = {
 					term : term,
 					page : 0
 				};
-				search.loadItems();
-				search.nextPage();
-				search.loadItems();
-				search.nextPage();
-				search.loadItems();
-				utils.infiniteScrolling(search.nextPage);
+
+				search.showResults();
 			});
 		}
 	}
@@ -62,6 +50,22 @@ var search = {
 	params : {
 		term : "",
 		page : 0
+	},
+	loading : undefined,
+	template : undefined,
+	showResults : function() {
+		search.loading = $(".loading-template .list-group-item").clone();
+		search.template = $(".result-template .list-group-item").clone();
+		$(".loading-template").remove();
+		$(".result-template").remove();
+
+		search.loadItems();
+		search.nextPage();
+		search.nextPage();
+		utils.infiniteScrolling(search.nextPage);
+		$(".items .loading").remove();
+		$(".items").append(search.loading.clone());
+		$(".items").append(search.loading.clone());
 	},
 	nextPage : function() {
 		search.params.page = search.params.page + 1;
@@ -74,7 +78,6 @@ var search = {
 		var api = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=" + search.maxItems + "&start="
 				+ (search.params.page * search.maxItems) + "&q=" + search.params.term;
 		var items = $(".items");
-		var template = $(".result-template .list-group-item").clone();
 		$.ajax({
 			type : 'GET',
 			url : api,
@@ -82,14 +85,19 @@ var search = {
 			success : function(data) {
 				if (data.responseData && data.responseData.results) {
 					var images = data.responseData.results;
+					$(".items .loading").remove();
 					$.each(images, function(imageIndex) {
 						var image = images[imageIndex]
-						var item = template.clone();
+						var item = search.template.clone();
 						item.find(".item-img").attr("src", image.tbUrl);
 						item.find(".item-name").text(image.contentNoFormatting);
 						item.find(".item-desc").text(image.titleNoFormatting);
 						items.append(item);
 					});
+					$(".items").append(search.loading.clone());
+					$(".items").append(search.loading.clone());
+				} else {
+					$($(".items .loading")[0]).remove();
 				}
 			},
 			failure : function(err) {
@@ -103,19 +111,14 @@ var utils = {
 	infiniteScrolling : function(callback) {
 		$(window).scroll(function() {
 			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-				$('div.loading').show();
-				callback();
-				// $.ajax({
-				// url : "loadmore.php",
-				// success : function(html) {
-				// if (html) {
-				// $("#postswrapper").append(html);
-				// $('div#loadmoreajaxloader').hide();
-				// } else {
-				// $('div#loadmoreajaxloader').html('<center>No more posts to show.</center>');
-				// }
-				// }
-				// });
+				// $(".items .loading").remove();
+				// $(".items").append(search.loading.clone());
+				// $(".items").append(search.loading.clone());
+				// var top = $($(".items .loading")[0]).position().top;
+				// $(window).scrollTop(top);
+				setTimeout(function() {
+					callback();
+				}, 3000);
 			}
 		});
 	}
