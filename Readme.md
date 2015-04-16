@@ -1,9 +1,11 @@
-# Android setup (https://cordova.apache.org/docs/en/4.0.0/guide_platforms_android_index.md.html)
+# Android setup
+(https://cordova.apache.org/docs/en/4.0.0/guide_platforms_android_index.md.html)
 
 Install Android SDK
 Set Android SDK's platform-tools and tools to path
 
-# Cordova setup (https://cordova.apache.org/docs/en/4.0.0/guide_cli_index.md.html#The%20Command-Line%20Interface)
+# Cordova setup
+(https://cordova.apache.org/docs/en/4.0.0/guide_cli_index.md.html#The%20Command-Line%20Interface)
 
 Install Node.js
 Install Cordova
