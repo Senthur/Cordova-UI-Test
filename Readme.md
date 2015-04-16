@@ -18,7 +18,7 @@ Done.. Create new cordova project
 
 
 #Creating new project is simple:
--------------------------------
+
 cordova create ProjectName com.example.hello AppName
 cd ProjectName
 cordova platform add android
